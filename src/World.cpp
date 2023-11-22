@@ -1,11 +1,11 @@
 #include "World.hpp"
 
-World::World(sf::RenderTarget &output_target, font_holder &fonts)
-    : target(output_target),
+World::World(State::Context context)
+    : target(*context.window),
       scene_texture(),
       world_view(target.getDefaultView()),
-      textures(),
-      fonts(fonts),
+      textures(*context.textures),
+      fonts(*context.fonts),
       scene_graph(),
       scene_layers(),
       world_bounds(
@@ -32,8 +32,17 @@ void World::load_textures()
 
 void World::build_scene()
 {
-}
+    // Initialize all the different layers.
+    for (size_t i = 0; i < size_t(Layer::LayerCount); ++i)
+    {
+        Category::Type category = Category::None;
 
+        SceneNode::Ptr layer(new SceneNode(category));
+        scene_layers[i] = layer.get();
+        scene_graph.attach_child(std::move(layer));
+    }
+    // std::unique_ptr<SpriteNode> terrain(new SpriteNode());
+}
 
 CommandQueue &World::get_command_queue() { return c_queue; }
 
@@ -45,16 +54,12 @@ sf::FloatRect World::get_view_bounds() const
 sf::FloatRect World::get_battlefiled_bounds() const
 {
     sf::FloatRect rect = get_view_bounds();
-    rect.top -= 100.f;
-    rect.height += 100.f;
-
     return rect;
 }
 
 void World::update(sf::Time dt)
 {
 }
-
 
 void World::draw()
 {

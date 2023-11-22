@@ -10,6 +10,9 @@
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/System/NonCopyable.hpp>
 
+#include <imgui.h>
+#include <imgui-SFML.h>
+
 #include <exception>
 #include <chrono>
 #include <fstream>
@@ -21,7 +24,7 @@ public:
     Application();
     void run();
 
-    ~Application() = default;
+    ~Application();
 
 private:
     void process_input();
@@ -46,6 +49,9 @@ private:
     sf::Text statistics_text;
     sf::Time statistics_update_time;
     std::size_t statistics_num_frames;
+
+    bool update_gui = true;
+    bool a = false;
 };
 
 #endif // APPLICATION_H

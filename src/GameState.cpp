@@ -3,7 +3,7 @@
 GameState::GameState(StateStack &stack,
                      Context context)
     : State(stack, context),
-      world(*context.window, *context.fonts),
+      world(context),
       player(*context.player),
       queue(world.get_command_queue())
 {

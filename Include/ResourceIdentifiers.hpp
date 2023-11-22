@@ -7,13 +7,7 @@ namespace Textures
     enum class ID
     {
         Undefined,
-        Entities,
-        Jungle,
-        TitleScreen,
-        Buttons,
-        Explosion,
-        Particle,
-        FinishLine,
+        Terrain
     };
 }
 
@@ -21,9 +15,6 @@ namespace Shaders
 {
     enum class ID
     {
-        BrightnessPass,
-        DownSamplePass,
-        GaussianBlurPass,
         AddPass
     };
 }
@@ -50,11 +41,6 @@ namespace Sound
     enum class ID
     {
         AlliedGunfire,
-        EnemyGunfire,
-        Explosion1,
-        Explosion2,
-        LaunchMissile,
-        CollectPickup,
         Button,
     };
 }
